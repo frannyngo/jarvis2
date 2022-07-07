@@ -9,8 +9,7 @@ mic.interimResults = true;
 mic.lang = "en-US";
 
 export function listen() {
-  console.log("mic");
-  //   utterance(" ");
+  utterance("hello");
   try {
     mic.start();
     mic.onend = () => {
@@ -21,13 +20,12 @@ export function listen() {
       console.log("listening");
     };
     mic.onresult = (event: any) => {
-      Array.from(event.results).map((result) => {
-        console.log(result);
-        // if (result.isFinal) {
-        //   const transcript = result[0].transcript;
-        //   console.log(transcript);
-        // const called = jarvisIsCalled(transcript);
-        // }
+      Array.from(event.results).map((result: any) => {
+        if (result?.isFinal) {
+          const transcript = result[0].transcript;
+          console.log(transcript);
+          utterance("hello");
+        }
       });
     };
     mic.onerror = (event: any) => {
